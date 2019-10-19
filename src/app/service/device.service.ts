@@ -14,6 +14,7 @@ export class DeviceService {
   }
 
   getAllDevices(): Observable<Array<Device>> {
+    console.log("getting all devices");
     return this.http.get<Array<Device>>(this.dmsURL);
   }
 }

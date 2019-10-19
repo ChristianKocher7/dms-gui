@@ -10,14 +10,17 @@ import {Device} from "../../shared/types";
 export class DevicesComponent implements OnInit {
 
   deviceArray: Device[] = [];
+  displayedColumns: string[] = ["name", "type", "currentOwner", "lastLogin"];
 
   constructor(private deviceService: DeviceService) {
   }
 
   ngOnInit() {
     this.deviceService.getAllDevices().subscribe(devices => {
+      console.log(devices);
       this.deviceArray = devices;
-    })
+      console.log(this.deviceArray);
+    });
   }
 
 }
