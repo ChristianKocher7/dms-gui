@@ -1,20 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Device} from "../shared/types";
+import {IDevice} from "../shared/types";
+import {getFullPath, SERVICES_URLS} from "../config/config";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceService {
 
-  dmsURL = 'http://localhost:8080/admin/devices';
+  dmsURL = getFullPath(SERVICES_URLS.devicesUrl);
 
   constructor(private http: HttpClient) {
   }
 
-  getAllDevices(): Observable<Array<Device>> {
+  getAllDevices(): Observable<Array<IDevice>> {
     console.log("getting all devices");
-    return this.http.get<Array<Device>>(this.dmsURL);
+    return this.http.get<Array<IDevice>>(this.dmsURL);
   }
 }

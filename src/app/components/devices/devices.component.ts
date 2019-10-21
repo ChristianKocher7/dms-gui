@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DeviceService} from "../../service/device.service";
-import {Device} from "../../shared/types";
+import {IDevice} from "../../shared/types";
 
 @Component({
   selector: 'app-devices',
@@ -9,7 +9,7 @@ import {Device} from "../../shared/types";
 })
 export class DevicesComponent implements OnInit {
 
-  deviceArray: Device[] = [];
+  deviceArray: IDevice[] = [];
   displayedColumns: string[] = ["name", "type", "currentOwner", "lastLogin"];
 
   constructor(private deviceService: DeviceService) {
