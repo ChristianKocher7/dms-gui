@@ -9,7 +9,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatInputModule,
-  MatOptionModule, MatSelectModule,
+  MatOptionModule, MatSelectModule, MatSortModule,
   MatTableModule,
   MatToolbarModule
 } from "@angular/material";
@@ -36,6 +36,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatButtonModule,
     MatOptionModule,
     MatSelectModule,
+    MatSortModule,
     FormsModule,
     HttpClientModule,
     FormsModule
