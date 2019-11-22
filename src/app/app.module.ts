@@ -7,9 +7,9 @@ import {DevicesComponent} from './components/devices/devices.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatExpansionModule,
   MatInputModule,
-  MatOptionModule, MatSelectModule, MatSortModule,
+  MatOptionModule, MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule, MatSortModule,
   MatTableModule,
   MatToolbarModule
 } from "@angular/material";
@@ -37,6 +37,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatOptionModule,
     MatSelectModule,
     MatSortModule,
+    MatExpansionModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
     FormsModule,
     HttpClientModule,
     FormsModule

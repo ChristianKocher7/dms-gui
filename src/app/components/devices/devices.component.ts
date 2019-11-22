@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DeviceService} from "../../service/device.service";
 import {IDevice} from "../../shared/types";
-import {MatSort, MatTableDataSource} from "@angular/material";
+import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-devices',
@@ -14,7 +14,10 @@ export class DevicesComponent implements OnInit {
   displayedColumns: string[] = ["name", "type", "currentOwner", "lastLogin"];
   dataSource = new MatTableDataSource(this.deviceArray);
 
+  isLoadingResults: boolean = true;
+
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private deviceService: DeviceService) {
   }
@@ -23,6 +26,7 @@ export class DevicesComponent implements OnInit {
     this.deviceService.getAllDevices().subscribe(devices => {
       console.log(devices);
       this.deviceArray = devices;
+      //this.isLoadingResults = false;
       console.log(this.deviceArray);
     });
 
