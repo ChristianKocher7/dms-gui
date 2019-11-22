@@ -1,8 +1,8 @@
 export interface IDevice {
   timestamp: Date;
   name: string;
-  modell: string;
-  benutzer: string;
+  model: string;
+  deviceUser: string;
   os: string;
   build: string;
   cpu: string;
@@ -10,10 +10,10 @@ export interface IDevice {
   hardDisk: string;
   installedBiosVersion: string;
   biosDate: Date;
-  seriennummer: string;
-  wartung: Date;
-  vorherigerBenutzer1: string;
-  vorherigerBenutzer2: string;
+  serialNumber: string;
+  maintenance: Date;
+  previousUser1: string;
+  previousUser2: string;
   teamviewerId: number;
 }
 
