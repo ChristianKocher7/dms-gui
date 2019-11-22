@@ -11,7 +11,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 export class DevicesComponent implements OnInit {
 
   deviceArray: IDevice[] = [];
-  displayedColumns: string[] = ["name", "type", "currentOwner", "lastLogin"];
+  displayedColumns: string[] = ["timestamp", "name", "modell", "benutzer", "os", "build", "cpu", "memory", "hardDisk", "installedBiosVersion", "biosDate", "seriennummer", "wartung", "vorherigerBenutzer1", "vorherigerBenutzer2", "teamviewerId"];
   dataSource = new MatTableDataSource(this.deviceArray);
 
   isLoadingResults: boolean = true;
