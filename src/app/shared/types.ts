@@ -1,8 +1,20 @@
 export interface IDevice {
+  timestamp: Date;
   name: string;
-  type: string;
-  currentOwner: string;
-  lastLogin: Date;
+  modell: string;
+  benutzer: string;
+  os: string;
+  build: string;
+  cpu: string;
+  memory: string;
+  hardDisk: string;
+  installedBiosVersion: string;
+  biosDate: Date;
+  seriennummer: string;
+  wartung: Date;
+  vorherigerBenutzer1: string;
+  vorherigerBenutzer2: string;
+  teamviewerId: number;
 }
 
 export class UserDetails {
