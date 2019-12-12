@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {DevicesComponent} from "./components/devices/devices.component";
 import {LoginComponent} from "./components/login/login/login.component";
+import { AuthenticationGuardService } from './shared/service/authentication-guard.service';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'devices',
-    component: DevicesComponent
+    component: DevicesComponent,
+    canActivate: [AuthenticationGuardService]
   }
 ];
 

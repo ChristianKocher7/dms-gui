@@ -1,44 +1,58 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {getFullPath, SERVICES_URLS, USER_AUTHENTICATION} from "../../config/config";
 import {map} from "rxjs/operators";
-import {UserDetails} from "../types";
-import {log} from "util";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthenticationService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
-  authenticateUser(): Observable<boolean> {
-    console.log('path: ' + SERVICES_URLS.userInfoUrl);
-    return this.httpClient.get(getFullPath(SERVICES_URLS.userInfoUrl)).pipe(map((userDetails: any) => {
-      console.log("the provider has answered the call for the user");
-      const token = userDetails.details.tokenValue;
-      const username = userDetails.userAuthentication.details.preferred_username;
-      const office = userDetails.userAuthentication.details.office_code;
-      const authorities = userDetails.userAuthentication.details.authorities;
-      const groups = userDetails.userAuthentication.details.groups;
-      const user = new UserDetails(token, username, office, authorities, groups);
-      localStorage.setItem(USER_AUTHENTICATION.user, JSON.stringify(user));
-      return true;
-    }));
+  authenticateUser(username, password): Observable<string> {
+    console.log("authenticateUser!");
+    let basicAuthHeader = 'Basic ' + window.btoa(username + ':' + password);
+    console.log(basicAuthHeader);
+    console.log(username + " " + password)
+    let header = new HttpHeaders({
+      Authorization: basicAuthHeader
+    });
+    return this.http.get<string>(getFullPath(SERVICES_URLS.basicAuthUrl), {headers: header}).pipe(
+      map(
+        response => {
+          console.log(response);
+          sessionStorage.setItem(USER_AUTHENTICATION.user, username);
+          sessionStorage.setItem(USER_AUTHENTICATION.token, basicAuthHeader);
+          return response;
+        }
+      )
+    );
   }
 
-  getUser(): UserDetails {
-    return JSON.parse(localStorage.getItem(USER_AUTHENTICATION.user));
+  getAuthenticatedUser(): string {
+    console.log("getAuthenticateUser!");
+    return sessionStorage.getItem(USER_AUTHENTICATION.user);
   }
 
-  getUserToken(): string {
-    const user = this.getUser();
-    return user && user.token;
+  getAuthenticatedToken(): string {
+    if (this.getAuthenticatedUser()) {
+      console.log("getAuthenticatedToken!")
+      return sessionStorage.getItem(USER_AUTHENTICATION.token);
+    }
+    return null;
+  }
+
+  isUserLoggedIn(): boolean {
+    let user = sessionStorage.getItem(USER_AUTHENTICATION.user);
+    return user !== null;
   }
 
   logout() {
-    localStorage.removeItem(USER_AUTHENTICATION.user);
+    sessionStorage.removeItem(USER_AUTHENTICATION.user);
+    sessionStorage.removeItem(USER_AUTHENTICATION.token);
   }
 }

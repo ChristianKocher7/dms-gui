@@ -13,10 +13,11 @@ import {
   MatTableModule,
   MatToolbarModule
 } from "@angular/material";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {LoginComponent} from './components/login/login/login.component';
 import {FormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import { HttpInterceptorBasicAuthService } from './shared/service/http-interceptor-basic-auth.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    //{provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
