@@ -2,7 +2,18 @@
   <mat-card-title>Devices</mat-card-title>
   <mat-accordion class="padded-accordion">
     <mat-expansion-panel>
-      <mat-expansion-panel-header>Advanced Filter</mat-expansion-panel-header>
+      <mat-expansion-panel-header>Search and Filter</mat-expansion-panel-header>
+      <div class="example-container">
+        <mat-form-field class="example-form-field">
+          <input matInput type="text" placeholder="Fulltext Search" [(ngModel)]="fulltextSearchValue" (keydown.enter)="search()" (keydown.esc)="fulltextSearchValue=''">
+          <button mat-button *ngIf="fulltextSearchValue" matSuffix mat-icon-button aria-label="Clear" (click)="fulltextSearchValue=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button mat-flat-button (click)="search()" color="primary">Search</button>
+
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 

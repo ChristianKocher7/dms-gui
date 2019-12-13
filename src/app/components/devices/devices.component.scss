@@ -30,3 +30,12 @@ mat-card{
   overflow: hidden;
   height: auto;
 }
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 33%;
+}

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, SimpleChange, ViewChild} from '@angular/core';
 import {DeviceService} from "../../service/device.service";
 import {IDevice} from "../../shared/types";
 import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
@@ -13,8 +13,7 @@ export class DevicesComponent implements OnInit {
   deviceArray: IDevice[] = [];
   displayedColumns: string[] = ["timestamp", "name", "modell", "benutzer", "os", "build", "cpu", "memory", "hardDisk", "installedBiosVersion", "biosDate", "seriennummer", "wartung", "vorherigerBenutzer1", "vorherigerBenutzer2", "teamviewerId"];
   dataSource = new MatTableDataSource(this.deviceArray);
-
-  isLoadingResults: boolean = true;
+  fulltextSearchValue = '';
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -23,15 +22,31 @@ export class DevicesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllDevices();
+    this.dataSource.data = this.deviceArray;
+    this.dataSource.sort = this.sort;
+  }
+
+  search() {
+    if (this.fulltextSearchValue != '') {
+      this.deviceService.keyWordSearch(this.fulltextSearchValue).subscribe(devices => {
+        console.log(devices);
+        this.deviceArray = devices;
+        //this.isLoadingResults = false;
+        console.log(this.deviceArray);
+      });
+    } else {
+      this.getAllDevices();
+    }
+  }
+
+  getAllDevices() {
     this.deviceService.getAllDevices().subscribe(devices => {
       console.log(devices);
       this.deviceArray = devices;
       //this.isLoadingResults = false;
       console.log(this.deviceArray);
     });
-
-    this.dataSource.data = this.deviceArray;
-    this.dataSource.sort = this.sort;
   }
 
 }
