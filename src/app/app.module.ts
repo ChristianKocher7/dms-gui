@@ -18,12 +18,14 @@ import {LoginComponent} from './components/login/login/login.component';
 import {FormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { HttpInterceptorBasicAuthService } from './shared/service/http-interceptor-basic-auth.service';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DevicesComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { HttpInterceptorBasicAuthService } from './shared/service/http-intercept
     FormsModule
   ],
   providers: [
-    //{provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthService, multi: true}
+    //Activates our custom Http Interceptor
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

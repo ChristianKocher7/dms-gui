@@ -4,6 +4,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {getFullPath, SERVICES_URLS, USER_AUTHENTICATION} from "../../config/config";
 import {map} from "rxjs/operators";
 
+export class AuthenticationBean {
+  constructor(public message: String) { }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +16,14 @@ export class UserAuthenticationService {
   constructor(private http: HttpClient) {
   }
 
-  authenticateUser(username, password): Observable<string> {
-    console.log("authenticateUser!");
+  authenticateUser(username, password): Observable<AuthenticationBean> {
     let basicAuthHeader = 'Basic ' + window.btoa(username + ':' + password);
-    console.log(basicAuthHeader);
-    console.log(username + " " + password)
     let header = new HttpHeaders({
       Authorization: basicAuthHeader
     });
-    return this.http.get<string>(getFullPath(SERVICES_URLS.basicAuthUrl), {headers: header}).pipe(
+    return this.http.get<AuthenticationBean>(getFullPath(SERVICES_URLS.basicAuthUrl), {headers: header}).pipe(
       map(
         response => {
-          console.log(response);
           sessionStorage.setItem(USER_AUTHENTICATION.user, username);
           sessionStorage.setItem(USER_AUTHENTICATION.token, basicAuthHeader);
           return response;
@@ -34,13 +33,11 @@ export class UserAuthenticationService {
   }
 
   getAuthenticatedUser(): string {
-    console.log("getAuthenticateUser!");
     return sessionStorage.getItem(USER_AUTHENTICATION.user);
   }
 
   getAuthenticatedToken(): string {
     if (this.getAuthenticatedUser()) {
-      console.log("getAuthenticatedToken!")
       return sessionStorage.getItem(USER_AUTHENTICATION.token);
     }
     return null;

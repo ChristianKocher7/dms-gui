@@ -15,7 +15,6 @@ export class HttpInterceptorBasicAuthService implements HttpInterceptor {
     let username = this.userAuthenticationService.getAuthenticatedUser();
     //if both are not null
     if (basicAuthHeader && username) {
-      console.log("intercept!")
       request = request.clone({
         setHeaders: {
           Authorization: basicAuthHeader

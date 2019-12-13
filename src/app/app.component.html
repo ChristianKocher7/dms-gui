@@ -1,9 +1,12 @@
 <div class="app-root">
   <mat-toolbar color="primary">
-    <span>Device Management System ARGECPC</span>
+    <mat-toolbar-row>
+      <span>Device Management System ARGECPC</span>
+      <span class="fill-remaining-space"></span>
+      <span class="logout" *ngIf='userAuthenticationService.isUserLoggedIn()' routerLink="/logout">Logout</span>
+    </mat-toolbar-row>
   </mat-toolbar>
   <div class="container">
     <router-outlet></router-outlet>
   </div>
-
 </div>

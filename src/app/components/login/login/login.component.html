@@ -1,18 +1,16 @@
 <div>
   <mat-card class="login-card">
     <mat-card-title>Login</mat-card-title>
-    <div class="alert alert-danger" *ngIf="invalidLogin">
+    <div class="alert" *ngIf="invalidLogin">
       Invalid Credentials. Please try again.
     </div>
     <div class="form-container">
       <mat-form-field>
         <input matInput type="text" name="username" [(ngModel)]="username"  placeholder="Username">
       </mat-form-field>
-
       <mat-form-field>
-        <input matInput type="text" name="password" [(ngModel)]="password"  placeholder="Password">
+        <input matInput type="password" name="password" [(ngModel)]="password"  placeholder="Password">
       </mat-form-field>
-
       <button mat-flat-button (click)="basicAuthLogin()" color="primary">Login</button>
     </div>
   </mat-card>
