@@ -11,7 +11,7 @@
           <input matInput type="text" placeholder="Fulltext Search" [(ngModel)]="fulltextSearchValue"
                  (keydown.enter)="search()" (keydown.esc)="clear()">
           <button mat-button *ngIf="fulltextSearchValue" matSuffix mat-icon-button aria-label="Clear"
-                  (click)="fulltextSearchValue=''">
+                  (click)="clear()">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
