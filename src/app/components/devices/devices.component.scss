@@ -1,19 +1,23 @@
-table{
+table {
   width: 100%;
 }
 
-mat-card{
+mat-card {
   background-color: whitesmoke;
   height: 100%;
 }
 
-.table-container{
+.table-container {
   height: 550px;
   overflow: auto;
 }
 
-.padded-accordion{
+.padded-accordion {
   padding: 5px;
+}
+
+.padded-button {
+  margin-bottom: 5px;
 }
 
 .loading-shade {

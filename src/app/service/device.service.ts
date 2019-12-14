@@ -24,4 +24,5 @@ export class DeviceService {
     console.log("searching with keyword " + keyword);
     return this.http.get<Array<IDevice>>(this.searchURL + keyword);
   }
+
 }
