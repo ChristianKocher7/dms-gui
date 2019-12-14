@@ -1,19 +1,17 @@
 <div>
   <mat-card class="login-card">
     <mat-card-title>Login</mat-card-title>
-    <div class="alert alert-danger" [hidden]="!error">
-      There was a problem logging in. Please try again.
+    <div class="alert" *ngIf="invalidLogin">
+      Invalid Credentials. Please try again.
     </div>
     <div class="form-container">
       <mat-form-field>
-        <input matInput placeholder="Username">
+        <input matInput type="text" name="username" [(ngModel)]="username"  placeholder="Username">
       </mat-form-field>
-
       <mat-form-field>
-        <input matInput placeholder="Password">
+        <input matInput type="password" name="password" [(ngModel)]="password"  placeholder="Password">
       </mat-form-field>
-
-      <button mat-flat-button (click)="login()" color="primary">Login (just click here for now)</button>
+      <button mat-flat-button (click)="basicAuthLogin()" color="primary">Login</button>
     </div>
   </mat-card>
 </div>

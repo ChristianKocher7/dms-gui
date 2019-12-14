@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ElementRef} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserAuthenticationService} from "../../../shared/service/user-authentication.service";
 
@@ -7,20 +7,36 @@ import {UserAuthenticationService} from "../../../shared/service/user-authentica
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
-  credentials = {username: '', password: ''};
+  username = '';
+  password = '';
+  invalidLogin = false;
 
-  constructor(private router: Router, private authenticationService: UserAuthenticationService) { }
+  constructor(private router: Router, 
+              private userAuthenticationService: UserAuthenticationService,
+              private elementRef: ElementRef) { }
 
   ngOnInit() {
   }
 
-  login(){
-    this.authenticationService.authenticateUser();
-    console.log(this.authenticationService.getUser());
-    console.log(this.authenticationService.getUserToken());
-    this.router.navigate(['/devices']);
+  basicAuthLogin() {
+    this.userAuthenticationService.authenticateUser(this.username, this.password)
+    .subscribe(
+      response => {
+        console.log(response.message);
+        this.router.navigate(['devices']);
+        this.invalidLogin = false;
+      },
+      error => {
+        console.log(error);
+        this.invalidLogin = true;
+        this.username = '';
+        this.password = '';
+        
+      }
+    )
   }
 
 }
