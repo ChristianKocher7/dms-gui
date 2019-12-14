@@ -10,6 +10,7 @@ import {getFullPath, SERVICES_URLS} from "../config/config";
 export class DeviceService {
 
   dmsURL = getFullPath(SERVICES_URLS.devicesUrl);
+  searchURL = getFullPath(SERVICES_URLS.fulltextSearchUrl);
 
   constructor(private http: HttpClient) {
   }
@@ -18,4 +19,10 @@ export class DeviceService {
     console.log("getting all devices");
     return this.http.get<Array<IDevice>>(this.dmsURL);
   }
+
+  keyWordSearch(keyword: string): Observable<Array<IDevice>> {
+    console.log("searching with keyword " + keyword);
+    return this.http.get<Array<IDevice>>(this.searchURL + keyword);
+  }
+
 }

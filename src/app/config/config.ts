@@ -3,6 +3,8 @@ const API_PATH = 'api';
 export const SERVICES_URLS = {
   devicesUrl: `${API_PATH}/devices`,
   basicAuthUrl: 'basicauth',
+  fulltextSearchUrl: `${API_PATH}/devices/search/`,
+  userInfoUrl: `${API_PATH}/user`,
   loginUrl: 'login'
 };
 

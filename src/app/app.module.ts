@@ -7,7 +7,7 @@ import {DevicesComponent} from './components/devices/devices.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
-  MatCardModule, MatExpansionModule,
+  MatCardModule, MatDividerModule, MatExpansionModule, MatIconModule,
   MatInputModule,
   MatOptionModule, MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule, MatSortModule,
   MatTableModule,
@@ -43,6 +43,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     MatExpansionModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatIconModule,
+    MatDividerModule,
     FormsModule,
     HttpClientModule,
     FormsModule
