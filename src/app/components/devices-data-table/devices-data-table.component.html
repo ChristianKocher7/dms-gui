@@ -1,0 +1,134 @@
+<mat-card>
+<mat-card-title>Devices</mat-card-title>
+
+  <button mat-flat-button class="padded-button" (click)="exportList()" color="primary">Export</button>
+
+  <mat-accordion class="padded-accordion">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>Search and Filter</mat-expansion-panel-header>
+      <div class="example-container">
+        <mat-form-field class="example-form-field">
+          <input matInput type="text" placeholder="Fulltext Search" [(ngModel)]="fulltextSearchValue"
+                 (keydown.enter)="search()" (keydown.esc)="clear()">
+          <button mat-button *ngIf="fulltextSearchValue" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="clear()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button mat-flat-button (click)="search()" color="primary">Search</button>
+
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+<div class="table-container mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Timestamp Column -->
+    <ng-container matColumnDef="timestamp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
+      <td mat-cell *matCellDef="let row">{{row.timestamp}}</td>
+    </ng-container>
+
+    <!-- DeviceName Column -->
+    <ng-container matColumnDef="deviceName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Device Name</th>
+      <td mat-cell *matCellDef="let row">{{row.deviceName}}</td>
+    </ng-container>
+
+    <!-- Model Column -->
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Model</th>
+      <td mat-cell *matCellDef="let row">{{row.model}}</td>
+    </ng-container>
+
+    <!-- DeviceUser Column -->
+    <ng-container matColumnDef="deviceUser">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Device User</th>
+      <td mat-cell *matCellDef="let row">{{row.deviceUser}}</td>
+    </ng-container>
+
+    <!-- OS Column -->
+    <ng-container matColumnDef="os">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>OS</th>
+      <td mat-cell *matCellDef="let row">{{row.os}}</td>
+    </ng-container>
+
+    <!-- Build Column -->
+    <ng-container matColumnDef="build">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Build</th>
+      <td mat-cell *matCellDef="let row">{{row.build}}</td>
+    </ng-container>
+
+    <!-- CPU Column -->
+    <ng-container matColumnDef="cpu">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>CPU</th>
+      <td mat-cell *matCellDef="let row">{{row.cpu}}</td>
+    </ng-container>
+
+    <!-- Memory Column -->
+    <ng-container matColumnDef="memory">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Memory</th>
+      <td mat-cell *matCellDef="let row">{{row.memory}}</td>
+    </ng-container>
+
+    <!-- HardDisk Column -->
+    <ng-container matColumnDef="hardDisk">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Hard Disk</th>
+      <td mat-cell *matCellDef="let row">{{row.hardDisk}}</td>
+    </ng-container>
+
+    <!-- InstalledBiosVersion Column -->
+    <ng-container matColumnDef="installedBiosVersion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Installed Bios Version</th>
+      <td mat-cell *matCellDef="let row">{{row.installedBiosVersion}}</td>
+    </ng-container>
+
+    <!-- BiosDate Column -->
+    <ng-container matColumnDef="biosDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Bios Date</th>
+      <td mat-cell *matCellDef="let row">{{row.biosDate}}</td>
+    </ng-container>
+
+    <!-- SerialNumber Column -->
+    <ng-container matColumnDef="serialNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Serial Number</th>
+      <td mat-cell *matCellDef="let row">{{row.serialNumber}}</td>
+    </ng-container>
+
+    <!-- Maintenance Column -->
+    <ng-container matColumnDef="maintenance">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Maintenance</th>
+      <td mat-cell *matCellDef="let row">{{row.maintenance}}</td>
+    </ng-container>
+
+    <!-- PreviousUser1 Column -->
+    <ng-container matColumnDef="previousUser1">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Previous User 1</th>
+      <td mat-cell *matCellDef="let row">{{row.previousUser1}}</td>
+    </ng-container>
+
+    <!-- PreviousUser2 Column -->
+    <ng-container matColumnDef="previousUser2">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Previous User 2</th>
+      <td mat-cell *matCellDef="let row">{{row.previousUser2}}</td>
+    </ng-container>
+
+    <!-- TeamviewerId Column -->
+    <ng-container matColumnDef="teamviewerId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Teamviewer Id</th>
+      <td mat-cell *matCellDef="let row">{{row.teamviewerId}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data.length"
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 75, 100, 250]">
+  </mat-paginator>
+</div>
+</mat-card>
