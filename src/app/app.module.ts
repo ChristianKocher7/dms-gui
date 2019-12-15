@@ -19,13 +19,16 @@ import {FormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { HttpInterceptorBasicAuthService } from './shared/service/http-interceptor-basic-auth.service';
 import { LogoutComponent } from './components/logout/logout.component';
+import { DevicesDataTableComponent } from './components/devices-data-table/devices-data-table.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DevicesComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    DevicesDataTableComponent,
   ],
   imports: [
     BrowserModule,

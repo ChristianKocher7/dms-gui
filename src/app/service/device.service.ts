@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IDevice} from "../shared/types";
 import {getFullPath, SERVICES_URLS} from "../config/config";
+import { DevicesDataTableItem } from '../components/devices-data-table/devices-data-table-datasource';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,14 @@ export class DeviceService {
   constructor(private http: HttpClient) {
   }
 
-  getAllDevices(): Observable<Array<IDevice>> {
+  getAllDevices(): Observable<Array<DevicesDataTableItem>> {
     console.log("getting all devices");
-    return this.http.get<Array<IDevice>>(this.dmsURL);
+    return this.http.get<Array<DevicesDataTableItem>>(this.dmsURL);
   }
 
-  keyWordSearch(keyword: string): Observable<Array<IDevice>> {
+  keyWordSearch(keyword: string): Observable<Array<DevicesDataTableItem>> {
     console.log("searching with keyword " + keyword);
-    return this.http.get<Array<IDevice>>(this.searchURL + keyword);
+    return this.http.get<Array<DevicesDataTableItem>>(this.searchURL + keyword);
   }
 
 }

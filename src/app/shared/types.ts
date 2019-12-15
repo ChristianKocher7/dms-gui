@@ -1,6 +1,6 @@
 export interface IDevice {
   timestamp: Date;
-  name: string;
+  deviceName: string;
   model: string;
   deviceUser: string;
   os: string;

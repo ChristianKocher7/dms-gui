@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DeviceService} from "../../service/device.service";
 import {IDevice} from "../../shared/types";
 import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {saveAs} from 'file-saver';
+//import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-devices',
@@ -73,6 +73,6 @@ export class DevicesComponent implements OnInit {
     });
 
     const blob = new Blob(["\ufeff", csv], {type: 'text/csv'});
-    saveAs(blob, "myFile.csv");
+    //saveAs(blob, "myFile.csv");
   }
 }
