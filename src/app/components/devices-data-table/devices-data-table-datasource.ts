@@ -2,7 +2,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import { Observable, of as observableOf, merge, BehaviorSubject } from 'rxjs';
 import { DeviceService } from 'src/app/service/device.service';
 
 export interface DevicesDataTableItem {
@@ -30,7 +30,7 @@ export interface DevicesDataTableItem {
  * (including sorting, pagination, and filtering).
  */
 export class DevicesDataTableDataSource extends DataSource<DevicesDataTableItem> {
-  data: DevicesDataTableItem[];
+  data = new BehaviorSubject<DevicesDataTableItem[]>([]);
   paginator: MatPaginator;
   sort: MatSort;
   
@@ -42,23 +42,22 @@ export class DevicesDataTableDataSource extends DataSource<DevicesDataTableItem>
   search(fulltextSearchValue: string) {
       this.deviceService.keyWordSearch(fulltextSearchValue).subscribe(devices => {
         console.log(devices);
-        this.data = [];
-        this.data = devices;
-        //this.isLoadingResults = false;
+        this.data.next(devices);
       });
   }
 
   getAllDevices() {
+    console.log("getAllDevices()");
     this.deviceService.getAllDevices().subscribe(devices => {
-      //console.log(devices);
-      this.data = devices;
-      //this.isLoadingResults = false;
+      console.log(devices);
+      this.data.next(devices);
     });
   }
 
   clear() {
     this.getAllDevices();
   }
+
 
   /*exportList() {
     if (!this.deviceArray || !this.deviceArray.length) {
@@ -87,8 +86,13 @@ export class DevicesDataTableDataSource extends DataSource<DevicesDataTableItem>
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<DevicesDataTableItem[]> {
+   
+    return this.data;
+
+    //return this.data;
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
+    /*console.log("connect()");
     const dataMutations = [
       observableOf(this.data),
       this.paginator.page,
@@ -96,8 +100,9 @@ export class DevicesDataTableDataSource extends DataSource<DevicesDataTableItem>
     ];
 
     return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
-    }));
+      return this.getPagedData(this.getSortedData(this.data.value));
+      
+    }));*/
   }
 
   /**

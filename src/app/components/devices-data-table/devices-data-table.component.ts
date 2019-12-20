@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -18,7 +18,6 @@ export class DevicesDataTableComponent implements AfterViewInit, OnInit {
   dataSource: DevicesDataTableDataSource;
 
   fulltextSearchValue = '';
-  
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ["timestamp", 
                       "deviceName", 
@@ -39,13 +38,15 @@ export class DevicesDataTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.dataSource = new DevicesDataTableDataSource(this.deviceService);
+    
     this.dataSource.getAllDevices();
   }
 
   ngAfterViewInit() {
+    this.table.dataSource = this.dataSource;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    
   }
 
   search() {
@@ -61,6 +62,5 @@ export class DevicesDataTableComponent implements AfterViewInit, OnInit {
     this.fulltextSearchValue = '';
     this.dataSource.clear();
   }
-
   
 }
