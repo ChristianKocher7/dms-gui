@@ -23,7 +23,7 @@
   </mat-accordion>
 
   <mat-accordion class="padded-accordion">
-    <mat-expansion-panel >
+    <mat-expansion-panel>
       <mat-expansion-panel-header>Displayed Columns</mat-expansion-panel-header>
       <div class="container">
         <mat-checkbox (change)="turnColumnOff('os')">OS</mat-checkbox>
@@ -39,89 +39,97 @@
   </mat-accordion>
 
   <div class="table-container mat-elevation-z8">
-    <table mat-table [dataSource]="deviceArray">
+    <table mat-table [dataSource]="deviceArray" matSort>
       <ng-container matColumnDef="timestamp">
-        <th mat-header-cell *matHeaderCellDef>Timestamp</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('timestamp')">Timestamp</th>
         <td mat-cell *matCellDef="let element"> {{element.timestamp}} </td>
       </ng-container>
 
       <ng-container matColumnDef="deviceName">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('deviceName')">Name</th>
         <td mat-cell *matCellDef="let element"> {{element.deviceName}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="modell">
-        <th mat-header-cell *matHeaderCellDef>Modell</th>
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('model')">Modell</th>
         <td mat-cell *matCellDef="let element"> {{element.model}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="benutzer">
-        <th mat-header-cell *matHeaderCellDef>Benutzer</th>
+      <ng-container matColumnDef="deviceUser">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('deviceUser')">Benutzer</th>
         <td mat-cell *matCellDef="let element"> {{element.deviceUser}} </td>
       </ng-container>
 
       <ng-container matColumnDef="os">
-        <th mat-header-cell *matHeaderCellDef> OS</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('os')"> OS</th>
         <td mat-cell *matCellDef="let element"> {{element.os}} </td>
       </ng-container>
 
       <ng-container matColumnDef="build">
-        <th mat-header-cell *matHeaderCellDef>Build</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('build')">Build</th>
         <td mat-cell *matCellDef="let element"> {{element.build}} </td>
       </ng-container>
 
       <ng-container matColumnDef="cpu">
-        <th mat-header-cell *matHeaderCellDef>CPU</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('cpu')">CPU</th>
         <td mat-cell *matCellDef="let element"> {{element.cpu}} </td>
       </ng-container>
 
       <ng-container matColumnDef="memory">
-        <th mat-header-cell *matHeaderCellDef>Memory</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('memory')">Memory</th>
         <td mat-cell *matCellDef="let element"> {{element.memory}} </td>
       </ng-container>
 
       <ng-container matColumnDef="hardDisk">
-        <th mat-header-cell *matHeaderCellDef>Harddisk</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('hardDisk')">Harddisk</th>
         <td mat-cell *matCellDef="let element"> {{element.hardDisk}} </td>
       </ng-container>
 
       <ng-container matColumnDef="installedBiosVersion">
-        <th mat-header-cell *matHeaderCellDef>Inst. BIOS Version</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('installedBiosVersion')">Inst. BIOS
+          Version
+        </th>
         <td mat-cell *matCellDef="let element"> {{element.installedBiosVersion}} </td>
       </ng-container>
 
       <ng-container matColumnDef="biosDate">
-        <th mat-header-cell *matHeaderCellDef>BIOS Date</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('biosDate')">BIOS Date</th>
         <td mat-cell *matCellDef="let element"> {{element.biosDate}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="seriennummer">
-        <th mat-header-cell *matHeaderCellDef>Seriennummer</th>
+      <ng-container matColumnDef="serialNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('serialNumber')">Seriennummer</th>
         <td mat-cell *matCellDef="let element"> {{element.serialNumber}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="wartung">
-        <th mat-header-cell *matHeaderCellDef>Wartung</th>
-        <td mat-cell *matCellDef="let element" [ngClass]="getMaintenanceClass(element.maintenance)"> {{element.maintenance}} </td>
+      <ng-container matColumnDef="maintenance">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('maintenance')">Wartung</th>
+        <td mat-cell *matCellDef="let element"
+            [ngClass]="getMaintenanceClass(element.maintenance)"> {{element.maintenance}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="vorherigerBenutzer1">
-        <th mat-header-cell *matHeaderCellDef>Vorheriger Benutzer 1</th>
+      <ng-container matColumnDef="previousUser1">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('previousUser1')">Vorheriger Benutzer
+          1
+        </th>
         <td mat-cell *matCellDef="let element"> {{element.previousUser1}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="vorherigerBenutzer2">
-        <th mat-header-cell *matHeaderCellDef>Vorheriger Benutzer 2</th>
+      <ng-container matColumnDef="previousUser2">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('previousUser2')">Vorheriger Benutzer
+          2
+        </th>
         <td mat-cell *matCellDef="let element"> {{element.previousUser2}} </td>
       </ng-container>
 
       <ng-container matColumnDef="teamviewerId">
-        <th mat-header-cell *matHeaderCellDef>Teamviewer ID</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('teamviewerId')">Teamviewer ID</th>
         <td mat-cell *matCellDef="let element"> {{element.teamviewerId}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'obsolete' : row.obsolete}" class="obsolete"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'obsolete' : row.obsolete}"
+          class="obsolete"></tr>
     </table>
   </div>
 </mat-card>
