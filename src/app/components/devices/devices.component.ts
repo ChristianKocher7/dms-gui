@@ -12,7 +12,25 @@ import {saveAs} from 'file-saver';
 export class DevicesComponent implements OnInit {
 
   deviceArray: IDevice[] = [];
-  displayedColumns: string[] = ["timestamp", "name", "modell", "benutzer", "os", "build", "cpu", "memory", "hardDisk", "installedBiosVersion", "biosDate", "seriennummer", "wartung", "vorherigerBenutzer1", "vorherigerBenutzer2", "teamviewerId"];
+  columnDefinitions = [
+    { def: 'timestamp', show: true },
+    { def: 'deviceName', show: true },
+    { def: 'modell', show: true },
+    { def: 'benutzer', show: true },
+    { def: 'os', show: false },
+    { def: 'build', show: false },
+    { def: 'cpu', show: false },
+    { def: 'memory', show: false },
+    { def: 'hardDisk', show: false },
+    { def: 'installedBiosVersion', show: true },
+    { def: 'biosDate', show: true },
+    { def: 'seriennummer', show: true },
+    { def: 'wartung', show: true },
+    { def: 'vorherigerBenutzer1', show: false },
+    { def: 'vorherigerBenutzer2', show: false },
+    { def: 'teamviewerId', show: false }
+  ];
+  displayedColumns: string[] = ["timestamp", "deviceName", "modell", "benutzer", "os", "build", "cpu", "memory", "hardDisk", "installedBiosVersion", "biosDate", "seriennummer", "wartung", "vorherigerBenutzer1", "vorherigerBenutzer2", "teamviewerId"];
   dataSource = new MatTableDataSource(this.deviceArray);
   fulltextSearchValue = '';
 
@@ -24,6 +42,7 @@ export class DevicesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllDevices();
+    this.displayedColumns = this.getDisplayedColumns();
     this.dataSource.data = this.deviceArray;
     this.dataSource.sort = this.sort;
   }
@@ -31,10 +50,7 @@ export class DevicesComponent implements OnInit {
   search() {
     if (this.fulltextSearchValue != '') {
       this.deviceService.keyWordSearch(this.fulltextSearchValue).subscribe(devices => {
-        console.log(devices);
         this.deviceArray = devices;
-        //this.isLoadingResults = false;
-        console.log(this.deviceArray);
       });
     } else {
       this.getAllDevices();
@@ -43,10 +59,7 @@ export class DevicesComponent implements OnInit {
 
   getAllDevices() {
     this.deviceService.getAllDevices().subscribe(devices => {
-      console.log(devices);
       this.deviceArray = devices;
-      //this.isLoadingResults = false;
-      console.log(this.deviceArray);
     });
   }
 
@@ -74,5 +87,36 @@ export class DevicesComponent implements OnInit {
 
     const blob = new Blob(["\ufeff", csv], {type: 'text/csv'});
     saveAs(blob, "myFile.csv");
+  }
+
+  getDisplayedColumns(): string[] {
+    return this.columnDefinitions
+      .filter(cd => cd.show)
+      .map(cd => cd.def);
+  }
+
+  turnColumnOff(columnName: string){
+    this.columnDefinitions.forEach(column => {
+      if(column.def == columnName){
+        column.show = !column.show;
+      }
+    });
+    this.displayedColumns = this.getDisplayedColumns();
+  }
+
+  getMaintenanceClass(maintenance: Date): string {
+    let maintenanceDate = new Date(maintenance);
+    let today = new Date();
+    let inThreeMonths = new Date(new Date().setDate(today.getDate()+90));
+    let inSixMonths = new Date(new Date().setDate(today.getDate()+180));
+    if(maintenanceDate < today) {
+      return "maintenance-overdue";
+    }else if(maintenanceDate > today && maintenanceDate < inThreeMonths){
+      return "maintenance-critical"
+    }else if( maintenanceDate > inThreeMonths && maintenanceDate < inSixMonths){
+      return "maintenance-due"
+    }else if(maintenanceDate > inSixMonths){
+      return "maintenance-good"
+    }
   }
 }

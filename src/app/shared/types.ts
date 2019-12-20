@@ -1,6 +1,6 @@
 export interface IDevice {
   timestamp: Date;
-  name: string;
+  deviceName: string;
   model: string;
   deviceUser: string;
   os: string;
@@ -15,15 +15,5 @@ export interface IDevice {
   previousUser1: string;
   previousUser2: string;
   teamviewerId: number;
+  obsolete: boolean;
 }
-
-export class UserDetails {
-  token: string;
-  username: string;
-
-  constructor(token: string, username: string, office: string, authorities: Array<string>, groups: Array<string>) {
-    this.token = token;
-    this.username = username;
-  }
-}
-
