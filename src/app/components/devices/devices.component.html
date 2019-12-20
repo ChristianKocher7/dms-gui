@@ -23,7 +23,7 @@
   </mat-accordion>
 
   <mat-accordion class="padded-accordion">
-    <mat-expansion-panel >
+    <mat-expansion-panel>
       <mat-expansion-panel-header>Displayed Columns</mat-expansion-panel-header>
       <div class="container">
         <mat-checkbox (change)="turnColumnOff('os')">OS</mat-checkbox>
@@ -86,7 +86,9 @@
       </ng-container>
 
       <ng-container matColumnDef="installedBiosVersion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('installedBiosVersion')">Inst. BIOS Version</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('installedBiosVersion')">Inst. BIOS
+          Version
+        </th>
         <td mat-cell *matCellDef="let element"> {{element.installedBiosVersion}} </td>
       </ng-container>
 
@@ -102,16 +104,21 @@
 
       <ng-container matColumnDef="maintenance">
         <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('maintenance')">Wartung</th>
-        <td mat-cell *matCellDef="let element" [ngClass]="getMaintenanceClass(element.maintenance)"> {{element.maintenance}} </td>
+        <td mat-cell *matCellDef="let element"
+            [ngClass]="getMaintenanceClass(element.maintenance)"> {{element.maintenance}} </td>
       </ng-container>
 
       <ng-container matColumnDef="previousUser1">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('previousUser1')">Vorheriger Benutzer 1</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('previousUser1')">Vorheriger Benutzer
+          1
+        </th>
         <td mat-cell *matCellDef="let element"> {{element.previousUser1}} </td>
       </ng-container>
 
       <ng-container matColumnDef="previousUser2">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('previousUser2')">Vorheriger Benutzer 2</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortArray('previousUser2')">Vorheriger Benutzer
+          2
+        </th>
         <td mat-cell *matCellDef="let element"> {{element.previousUser2}} </td>
       </ng-container>
 
@@ -121,7 +128,8 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'obsolete' : row.obsolete}" class="obsolete"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'obsolete' : row.obsolete}"
+          class="obsolete"></tr>
     </table>
   </div>
 </mat-card>
