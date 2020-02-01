@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
               private userAuthenticationService: UserAuthenticationService,
               private elementRef: ElementRef) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   
   basicAuthLogin() {
@@ -38,6 +37,12 @@ export class LoginComponent implements OnInit {
         
       }
     )
+  }
+
+  keyDownSubmit(event) {
+    if(event.keyCode == 13) {
+      this.basicAuthLogin();
+    }
   }
 
 }
